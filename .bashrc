@@ -18,6 +18,9 @@ export TERM=xterm-256color
 # Un prompt en couleur
 export PS1="\[\033[38;5;113m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;113m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]:\[$(tput sgr0)\]\[\033[38;5;110m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] > \[$(tput sgr0)\]"
 
+# Pour utiliser neovim pour crontab
+export EDITOR=nvim
+
 # Quelques alias utiles
 alias ..='cd ..'
 alias ...='cd ../..'

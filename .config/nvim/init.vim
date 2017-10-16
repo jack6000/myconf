@@ -175,7 +175,7 @@ inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 " fugitive keybindings
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gl :Glog<cr>
-nnoremap <leader>gD :Gdiff<cr>
+nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gc :Gcommit<cr>
 
 " Navigation dans un fichier C, garde la ligne
