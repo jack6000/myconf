@@ -277,10 +277,10 @@ augroup config_filetype
 augroup END
 augroup vaffle_plugin
     autocmd!
-    autocmd FileType vaffle nnoremap ~ :Vaffle ~<cr>
-    autocmd FileType vaffle nnoremap 1 :Vaffle ~/code/micro/arm/projects/<cr>
-    autocmd FileType vaffle nnoremap 2 :Vaffle ~/code/micro/avr/<cr>
-    autocmd FileType vaffle nnoremap 3 :Vaffle ~/code/desktop/<cr>
+    autocmd FileType vaffle nnoremap <buffer> ~ :Vaffle ~<cr>
+    autocmd FileType vaffle nnoremap <buffer> 1 :Vaffle ~/code/micro/arm/projects/<cr>
+    autocmd FileType vaffle nnoremap <buffer> 2 :Vaffle ~/code/micro/avr/<cr>
+    autocmd FileType vaffle nnoremap <buffer> 3 :Vaffle ~/code/desktop/<cr>
 augroup END
 augroup highlight_follows_focus
     autocmd!

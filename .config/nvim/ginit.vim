@@ -1,3 +1,3 @@
 if exists('g:GuiLoaded')
-    Guifont UbuntuMonoDerivativePowerline Nerd Font:h12
+    Guifont UbuntuMono Nerd Font:h12
 endif
