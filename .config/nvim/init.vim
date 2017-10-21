@@ -223,10 +223,11 @@ nnoremap - :execute 'Vaffle ' . ((strlen(bufname('')) == 0) ? '.' : '%:h')<CR>
 let g:lightline = {
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'readonly', 'bufnum', 'filename', 'modified' ] ]
+            \             [ 'fugitive', 'gitgutter', 'readonly', 'bufnum', 'filename', 'modified' ] ]
             \ },
             \ 'component_function': {
             \   'fugitive': 'LightlineFugitive',
+            \   'gitgutter': 'LightlineGitGutter',
             \   'readonly': 'LightlineReadonly',
             \ },
             \ 'component': {
@@ -265,6 +266,17 @@ function! LightlineFugitive()
     endif
     return ''
 endfunction
+function! LightlineGitGutter()
+    if exists('*GitGutterGetHunkSummary')
+        let hunks = GitGutterGetHunkSummary()
+        if hunks[0] == 0 && hunks[1] == 0 && hunks[2] == 0
+            return ''
+        endif
+        let string = printf("[+%d ~%d -%d]", hunks[0], hunks[1], hunks[2])
+        return string
+    endif
+    return ''
+endfunction
 "}}}
 "FSwitch plugin config {{{
 nnoremap <F4> :FSHere<cr>
@@ -289,6 +301,7 @@ augroup highlight_follows_focus
 augroup END
 augroup golang
     autocmd!
+    autocmd FileType go nnoremap <buffer> <F1> :GoDoc<cr>
     autocmd FileType go nnoremap <buffer> <F9> :GoBuild<cr>
     autocmd FileType go nnoremap <buffer> <F10> :GoRun<cr>
 augroup END
@@ -336,6 +349,7 @@ endfunction
 
 
 "<c-o> trigger single command mode
+"<c-g> show total number of lines
 "K : help on word under cursor
 "
 nohlsearch
