@@ -41,7 +41,7 @@ Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'mhartington/oceanic-next'
 Plug 'vim-scripts/Wombat'
 Plug 'morhetz/gruvbox'
-Plug 'sjl/badwolf'
+Plug 'NLKNguyen/papercolor-theme'
 "Plug 'zchee/hybrid.nvim'
 call plug#end()
 " }}}
@@ -223,11 +223,10 @@ nnoremap - :execute 'Vaffle ' . ((strlen(bufname('')) == 0) ? '.' : '%:h')<CR>
 let g:lightline = {
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'gitgutter', 'readonly', 'bufnum', 'filename', 'modified' ] ]
+            \             [ 'git', 'readonly', 'filename', 'modified' ] ]
             \ },
             \ 'component_function': {
-            \   'fugitive': 'LightlineFugitive',
-            \   'gitgutter': 'LightlineGitGutter',
+            \   'git': 'LightlineGit',
             \   'readonly': 'LightlineReadonly',
             \ },
             \ 'component': {
@@ -261,8 +260,8 @@ endfunction
     "return ''
 "endfunction
 function! LightlineFugitive()
-    if exists('*fugitive#statusline')
-        return fugitive#statusline()
+    if exists('*fugitive#head')
+        return fugitive#head()
     endif
     return ''
 endfunction
@@ -277,6 +276,24 @@ function! LightlineGitGutter()
     endif
     return ''
 endfunction
+function! LightlineGit()
+    if exists('*fugitive#head')
+        let head = fugitive#head()
+        if head == ''
+            return ''
+        endif
+        if exists('*GitGutterGetHunkSummary')
+            let hunks = GitGutterGetHunkSummary()
+            "if hunks[0] == 0 && hunks[1] == 0 && hunks[2] == 0
+                "return '[' . head . ']'
+            "endif
+            let string = printf(" +%d ~%d -%d", hunks[0], hunks[1], hunks[2])
+            return '[' . head . string . ']'
+        endif
+    endif
+    return ''
+endfunction
+
 "}}}
 "FSwitch plugin config {{{
 nnoremap <F4> :FSHere<cr>
