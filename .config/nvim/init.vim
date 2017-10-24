@@ -249,33 +249,11 @@ let g:lightline.mode_map = {
             \ }
 
 let g:lightline.subseparator = { 'left': '', 'right': '' }
+
 function! LightlineReadonly()
     return &readonly ? '' : ''
 endfunction
-"function! LightlineFugitive()
-    "if exists('*fugitive#head')
-        "let branch = fugitive#head()
-        "return branch !=# '' ? ''.branch : ''
-    "endif
-    "return ''
-"endfunction
-function! LightlineFugitive()
-    if exists('*fugitive#head')
-        return fugitive#head()
-    endif
-    return ''
-endfunction
-function! LightlineGitGutter()
-    if exists('*GitGutterGetHunkSummary')
-        let hunks = GitGutterGetHunkSummary()
-        if hunks[0] == 0 && hunks[1] == 0 && hunks[2] == 0
-            return ''
-        endif
-        let string = printf("[+%d ~%d -%d]", hunks[0], hunks[1], hunks[2])
-        return string
-    endif
-    return ''
-endfunction
+
 function! LightlineGit()
     if exists('*fugitive#head')
         let head = fugitive#head()
@@ -297,6 +275,9 @@ endfunction
 "}}}
 "FSwitch plugin config {{{
 nnoremap <F4> :FSHere<cr>
+"}}}
+"NerdCommenter plugin config {{{
+let g:NERDAltDelims_c = 1
 "}}}
 " Autogroups {{{
 augroup config_filetype
