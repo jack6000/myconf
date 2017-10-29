@@ -32,6 +32,7 @@ Plug 'cocopon/vaffle.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries'}
 Plug 'derekwyatt/vim-fswitch'
+Plug 'fidian/hexmode'
 ""-- Qques cool colorscheme
 Plug 'jack6000/vim-hybrid'
 "Plug 'tomasr/molokai'
@@ -184,7 +185,7 @@ nnoremap [[ [[zz
 nnoremap ]] ]]zz
 
 " Compilation
-nnoremap <silent> <f9> :w \| make! \| copen<cr>
+nnoremap <silent> <f9> :w \| make! \| cwindow<cr>
 
 " Programmation
 nnoremap <silent> <f10> :make program<cr>
