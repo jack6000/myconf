@@ -24,6 +24,8 @@ Plug 'cespare/vim-toml'
 Plug 'scrooloose/nerdcommenter'
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/ncm-clang'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
 "Plug 'vim-scripts/OmniCppComplete'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'tpope/vim-surround'
@@ -33,9 +35,9 @@ Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries'}
 Plug 'derekwyatt/vim-fswitch'
 Plug 'fidian/hexmode'
+
 ""-- Qques cool colorscheme
 Plug 'jack6000/vim-hybrid'
-"Plug 'tomasr/molokai'
 Plug 'jack6000/molokai'
 Plug 'crusoexia/vim-monokai'
 Plug 'tyrannicaltoucan/vim-quantum'
@@ -64,6 +66,8 @@ set hidden
 set switchbuf=useopen           " Lors de swtich de buffer, sélectionne la fenêtre déja ouverte
 set scrolloff=4                 " Garde le ligne courante toujours au centre
 set completeopt=menu,menuone,preview,longest
+set splitright                  " Affiche les nouvelles fenêtres à la droite de celle actuelle
+set splitbelow
 
 " Switch on syntax highlighting
 syntax enable
@@ -156,6 +160,10 @@ tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
 tnoremap <A-k> <C-\><C-n><C-w>k
 tnoremap <A-l> <C-\><C-n><C-w>l
+" Open Terminal buffer
+nnoremap <silent> <f12> :vnew +terminal<cr>
+nnoremap <silent> <s-f12> :new +terminal<cr>
+
 
 " Navigation dans les buffers
 nnoremap <leader>bp :bprevious<cr>
@@ -280,8 +288,24 @@ nnoremap <F4> :FSHere<cr>
 "NerdCommenter plugin config {{{
 let g:NERDAltDelims_c = 1
 "}}}
+"NeoSnippet plugin config {{{
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+"}}}
+"Vim-go plugin config {{{
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_auto_type_info = 1
+"}}}
 " Autogroups {{{
-augroup config_filetype
+augroup FiletypeConfig
     autocmd!
     autocmd FileType Makefile setlocal noexpandtab
     autocmd FileType xml setlocal foldmethod=syntax
@@ -293,16 +317,20 @@ augroup vaffle_plugin
     autocmd FileType vaffle nnoremap <buffer> 2 :Vaffle ~/code/micro/avr/<cr>
     autocmd FileType vaffle nnoremap <buffer> 3 :Vaffle ~/code/desktop/<cr>
 augroup END
-augroup highlight_follows_focus
+augroup CursorlineConfig
     autocmd!
     autocmd WinEnter * set cursorline
     autocmd WinLeave * set nocursorline
 augroup END
-augroup golang
+augroup GolangConfig
     autocmd!
     autocmd FileType go nnoremap <buffer> <F1> :GoDoc<cr>
     autocmd FileType go nnoremap <buffer> <F9> :GoBuild<cr>
     autocmd FileType go nnoremap <buffer> <F10> :GoRun<cr>
+augroup END
+augroup TerminalConfig
+    autocmd!
+    autocmd BufWinEnter,WinEnter,TermOpen term://* startinsert
 augroup END
 " }}}
 "  Abbréviations {{{
